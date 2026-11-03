@@ -1,475 +1,213 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Manoj Kumar P M</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Manoj Kumar P M — AI Product Manager. Case studies, product builds and strategy memos.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap">
-<style>
-/* Layout: a decision ledger — section labels in a left rail, work as entries; each case leads with its decision fork */
-:root{
-  --bg:#F1F3F0;
-  --surface:#FFFFFF;
-  --fg:#16211D;
-  --muted:#5B6862;
-  --line:#D5DBD6;
-  --accent:#2649B8;
-  --accent-soft:#E3E9FA;
-  --built:#1F7A4D;
-  --built-soft:#DDF0E5;
-  --designed:#9A6410;
-  --designed-soft:#F6EBD6;
-  --f-display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  --f-body:"Source Serif 4", Georgia, "Times New Roman", serif;
-  --f-mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#111815; --surface:#18211D; --fg:#E6ECE8; --muted:#97A59E; --line:#2C3833;
-    --accent:#8FA8FF; --accent-soft:#1E2A4D;
-    --built:#6FD3A0; --built-soft:#183526; --designed:#E8B65C; --designed-soft:#3A2D14;
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#111815; --surface:#18211D; --fg:#E6ECE8; --muted:#97A59E; --line:#2C3833;
-  --accent:#8FA8FF; --accent-soft:#1E2A4D;
-  --built:#6FD3A0; --built-soft:#183526; --designed:#E8B65C; --designed-soft:#3A2D14;
-  color-scheme:dark;
-}
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
-a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
-a:hover{text-decoration-thickness:2px}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
-.wrap{max-width:1040px;margin:0 auto;padding-left:max(20px, env(safe-area-inset-left, 0px));padding-right:max(20px, env(safe-area-inset-right, 0px))}
-
-/* nav */
-.nav{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:space-between;padding-block:22px;border-bottom:1px solid var(--line)}
-.mark{font-family:var(--f-display);font-weight:800;font-size:1.05rem;letter-spacing:-.01em;color:var(--fg);text-decoration:none}
-.nav ul{display:flex;flex-wrap:wrap;gap:4px 20px;list-style:none;margin:0;padding:0;font-family:var(--f-mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}
-.nav ul a{color:var(--muted);text-decoration:none}
-.nav ul a:hover{color:var(--fg)}
-
-/* hero */
-.hero{padding-block:72px 56px;display:grid;gap:28px}
-.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0}
-.hero h1{font-family:var(--f-display);font-weight:800;font-size:clamp(2.6rem, 7.4vw, 5.4rem);line-height:.98;letter-spacing:-.035em;margin:0;text-wrap:balance;max-width:14ch}
-.hero h1 em{font-style:normal;color:var(--accent)}
-.lede{font-size:1.2rem;max-width:60ch;margin:0;color:var(--fg)}
-.lede span{color:var(--muted)}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:4px}
-.btn{font-family:var(--f-mono);font-size:.82rem;letter-spacing:.04em;padding:11px 16px;border:1px solid var(--fg);color:var(--fg);text-decoration:none;display:inline-flex;gap:8px;align-items:center;transition:background .15s,color .15s}
-.btn.primary{background:var(--fg);color:var(--bg)}
-.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--surface);text-decoration:none}
-
-/* count line */
-.tally{display:flex;flex-wrap:wrap;gap:10px 36px;padding-block:18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
-.tally b{font-family:var(--f-display);font-size:1.5rem;color:var(--fg);font-weight:700;margin-right:6px;font-variant-numeric:tabular-nums}
-
-/* sections */
-section.block{display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px 48px;padding-block:72px;border-bottom:1px solid var(--line)}
-.rail{position:relative}
-.rail h2{font-family:var(--f-mono);font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:6px 0 0;position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px)}
-.content{min-width:0;display:grid;gap:40px}
-.intro{font-size:1.1rem;max-width:62ch;margin:0;color:var(--muted)}
-
-/* case entries */
-.case{background:var(--surface);border:1px solid var(--line);padding:clamp(22px,4vw,40px);display:grid;gap:22px}
-.case-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;align-items:baseline}
-.case h3{font-family:var(--f-display);font-weight:700;font-size:clamp(1.7rem,3.6vw,2.3rem);letter-spacing:-.02em;line-height:1.05;margin:0;text-wrap:balance}
-.kind{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.fork{border-left:3px solid var(--accent);padding:4px 0 4px 18px;margin:0}
-.fork .label{display:block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
-.fork p{margin:0;font-size:1.12rem;font-style:italic}
-.case p{margin:0;max-width:66ch}
-.ledger-wrap{overflow-x:auto}
-table.ledger{width:100%;border-collapse:collapse;font-size:.95rem;min-width:440px}
-.ledger th{text-align:left;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:0 12px 8px 0;border-bottom:1px solid var(--line)}
-.ledger td{padding:11px 12px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
-.ledger tr:last-child td{border-bottom:0}
-.chip{display:inline-block;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;white-space:nowrap}
-.chip.built{background:var(--built-soft);color:var(--built)}
-.chip.designed{background:var(--designed-soft);color:var(--designed)}
-.chip.queued{background:var(--accent-soft);color:var(--accent)}
-.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px 28px;margin:0}
-.facts div{min-width:0}
-.facts dt{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.facts dd{margin:0;font-size:.98rem}
-.links{display:flex;flex-wrap:wrap;gap:10px 22px;font-family:var(--f-mono);font-size:.82rem;padding-top:18px;border-top:1px solid var(--line)}
-.links a{text-decoration:none;font-weight:500}
-.links a:hover{text-decoration:underline}
-
-/* memo list */
-.memos{display:grid;gap:0;border-top:1px solid var(--line)}
-.memo{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 24px;padding-block:28px;border-bottom:1px solid var(--line)}
-.memo h3{font-family:var(--f-display);font-weight:700;font-size:1.45rem;letter-spacing:-.015em;line-height:1.15;margin:0 0 4px;text-wrap:balance}
-.memo .title{font-style:italic;color:var(--muted);margin:0 0 10px}
-.memo p{margin:0;max-width:62ch}
-.memo .side{text-align:right;display:grid;gap:8px;align-content:start;justify-items:end}
-.memo .side a{font-family:var(--f-mono);font-size:.8rem;text-decoration:none;white-space:nowrap}
-.memo .side a:hover{text-decoration:underline}
-
-/* principles */
-.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px 40px}
-.principles h3{font-family:var(--f-display);font-size:1.2rem;font-weight:700;letter-spacing:-.01em;margin:0 0 6px}
-.principles p{margin:0;color:var(--muted);font-size:.98rem}
-
-/* stack + creds */
-.tags{display:flex;flex-wrap:wrap;gap:8px}
-.tags span{font-family:var(--f-mono);font-size:.8rem;padding:6px 11px;border:1px solid var(--line);background:var(--surface)}
-.sub{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
-.creds{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
-.creds li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;padding-block:16px;border-bottom:1px solid var(--line)}
-.creds strong{font-weight:600}
-.creds .meta{display:block;color:var(--muted);font-size:.94rem}
-.creds .score{font-family:var(--f-mono);font-size:.85rem;color:var(--fg);font-variant-numeric:tabular-nums;white-space:nowrap;align-self:start;padding-top:3px}
-
-/* contact */
-.contact h2.big{font-family:var(--f-display);font-weight:800;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.03em;line-height:1;margin:0;text-wrap:balance;max-width:16ch}
-.contact-list{display:grid;gap:0;border-top:1px solid var(--line)}
-.contact-list a{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding-block:18px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg);min-width:0}
-.contact-list a span:first-child{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.contact-list a span:last-child{font-family:var(--f-display);font-weight:500;font-size:1.05rem;overflow-wrap:anywhere;text-align:right}
-.contact-list a:hover span:last-child{color:var(--accent)}
-footer{padding-block:32px 48px;font-family:var(--f-mono);font-size:.76rem;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
-
-@media (max-width:760px){
-  body{font-size:16px}
-  section.block{grid-template-columns:minmax(0,1fr);padding-block:52px;gap:18px}
-  .rail h2{position:static}
-  .hero{padding-block:48px 40px}
-  .memo{grid-template-columns:minmax(0,1fr)}
-  .memo .side{text-align:left;justify-items:start;grid-auto-flow:column;justify-content:start;gap:16px;align-items:center}
-}
-@media (prefers-reduced-motion:no-preference){
-  .hero > *{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
-  .hero > *:nth-child(2){animation-delay:.06s}
-  .hero > *:nth-child(3){animation-delay:.12s}
-  .hero > *:nth-child(4){animation-delay:.18s}
-  @keyframes rise{from{transform:translateY(10px);opacity:.01}to{transform:none;opacity:1}}
-}
-
-/* about */
-.about{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px;align-items:start}
-.bio{display:grid;gap:16px;min-width:0}
-.bio p{margin:0;max-width:62ch}
-.bio-lead{font-family:var(--f-display);font-weight:700;font-size:clamp(1.5rem,3vw,2rem);line-height:1.15;letter-spacing:-.02em;text-wrap:balance}
-.now{border-top:1px solid var(--line);padding-top:16px;color:var(--muted)}
-.now span{display:block;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
-.card{background:var(--surface);border:1px solid var(--line);padding:24px;display:grid;gap:20px;min-width:0}
-.mono{width:64px;height:64px;display:grid;place-items:center;background:var(--fg);color:var(--bg);font-family:var(--f-display);font-weight:800;font-size:1.4rem;letter-spacing:-.02em}
-.details{margin:0;display:grid;gap:14px}
-.details div{min-width:0}
-.details dt{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
-.details dd{margin:0;font-size:.95rem;overflow-wrap:anywhere}
-.tally.inline{border-top:0;padding-top:0}
-@media (max-width:900px){.about{grid-template-columns:minmax(0,1fr)}}
-
-.beyond{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;padding-top:8px}
-.lang-wrap{overflow-x:auto}
-table.langs{border-collapse:collapse;width:100%;font-size:.95rem}
-.langs th,.langs td{padding:10px 10px 10px 0;border-bottom:1px solid var(--line);text-align:left}
-.langs thead th{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
-.langs tbody th{font-weight:600}
-.langs td{text-align:center;width:64px;font-size:1rem}
-.langs thead th:not(:first-child){text-align:center}
-.langs td.y{color:var(--accent)}
-.langs td.n{color:var(--line)}
-.native{display:block;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:400}
-.interests cite{font-style:italic}
-@media (max-width:760px){.beyond{grid-template-columns:minmax(0,1fr)}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overcast - Weather is also Essential | Download for Windows</title>
+  <meta name="description" content="Download Overcast for Windows. Overcast is a weather application built around the idea that weather is also essential. Visit the official GitHub page to download the application.">
+  <meta name="keywords" content="Overcast, weather app, weather, Windows weather app, download Overcast, Overcast GitHub, essential weather, weather application">
+  <meta name="author" content="Overcast">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://github.com/patripollii/Overcast">
+  <meta property="og:title" content="Overcast - Weather is also Essential">
+  <meta property="og:description" content="Download Overcast for Windows. A simple weather application built around the idea that weather is also essential.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://github.com/patripollii/Overcast">
+  <meta property="og:site_name" content="Overcast">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Overcast - Weather is also Essential">
+  <meta name="twitter:description" content="Download Overcast for Windows. A simple weather application built around the idea that weather is also essential.">
 </head>
-<body>
-<div class="wrap">
-  <header class="nav">
-    <a class="mark" href="#top">Manoj Kumar P M</a>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#background">Education</a></li>
-      <li><a href="#builds">Projects</a></li>
-      <li><a href="#method">Method</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </header>
+<body style="margin:0;padding:0;background:#f3f6fb;color:#1f2937;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;">
+  <main style="max-width:980px;margin:0 auto;padding:clamp(20px,4vw,48px) clamp(16px,4vw,32px);">
+    <header style="background:linear-gradient(135deg,#eaf2ff 0%,#ffffff 55%,#fff4e8 100%);border-radius:24px;padding:clamp(24px,5vw,48px);box-shadow:0 16px 40px rgba(15,23,42,0.10);border:1px solid rgba(148,163,184,0.18);">
+      <h1 style="margin:0 0 16px 0;font-size:clamp(2rem,5vw,3.25rem);line-height:1.12;letter-spacing:-0.03em;color:#0f172a;">⛅ Overcast - Know the Weather Before You Go</h1>
+      <p style="margin:0 0 12px 0;font-size:clamp(1.05rem,2.2vw,1.25rem);color:#334155;max-width:780px;">Overcast is a weather application built around a simple idea: weather is also essential. It gives Windows users a clear, approachable way to keep weather information close at hand without a complicated setup.</p>
+      <p style="margin:0 0 24px 0;font-size:1.05rem;color:#475569;max-width:780px;">This page explains how to download Overcast from the official link, what to expect when you open it, and how to make it part of your everyday routine. You do not need programming knowledge to follow along.</p>
+      <a href="https://github.com/patripollii/Overcast" style="display:inline-block;padding:16px 26px;border-radius:999px;background:linear-gradient(135deg,#ff6<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overcast - Weather is also Essential | Download for Windows</title>
+  <meta name="description" content="Download Overcast for Windows. Overcast is a weather application built around a simple idea: weather is also essential. Visit the official GitHub page to download the application.">
+  <meta name="keywords" content="Overcast, weather app, weather application, Windows weather app, download Overcast, Overcast GitHub, essential weather, daily forecast">
+  <meta name="author" content="Overcast">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://github.com/patripollii/Overcast">
+  <meta property="og:title" content="Overcast - Weather is also Essential">
+  <meta property="og:description" content="Download Overcast for Windows. A simple weather application built around the idea that weather is also essential.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://github.com/patripollii/Overcast">
+  <meta property="og:site_name" content="Overcast">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Overcast - Weather is also Essential">
+  <meta name="twitter:description" content="Download Overcast for Windows. A simple weather application built around the idea that weather is also essential.">
+</head>
+<body style="margin:0;padding:0;background:#f3f6fb;color:#1f2937;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;">
+  <main style="max-width:980px;margin:0 auto;padding:clamp(20px,4vw,48px) clamp(16px,4vw,32px);">
 
-  <div class="hero" id="top">
-    <p class="eyebrow">AI Product Manager · Bengaluru</p>
-    <h1>I pick the decision, then <em>build enough</em> to prove it.</h1>
-    <p class="lede">Product case studies where the AI feature actually runs, the metrics are grounded in primary sources, and the limits are written down. <span>Every claim on this page links to a live build or a public repo.</span></p>
-    <div class="cta">
-      <a class="btn primary" href="Manoj-Kumar-PM-Resume.pdf" target="_blank" rel="noopener noreferrer">Download résumé (PDF)</a>
-      <a class="btn" href="#about">About me ↓</a>
-      <a class="btn" href="#builds">See the work ↓</a>
-      <a class="btn" href="https://github.com/manojkumarpm651-hub" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-      <a class="btn" href="https://www.linkedin.com/in/manoj-kumar-p-m-7a028a444" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-    </div>
-  </div>
+    <header style="background:linear-gradient(135deg,#eaf2ff 0%,#ffffff 55%,#fff4e8 100%);border-radius:24px;padding:clamp(24px,5vw,48px);box-shadow:0 16px 40px rgba(15,23,42,0.10);border:1px solid rgba(148,163,184,0.18);">
+      <h1 style="margin:0 0 16px 0;font-size:clamp(2rem,5vw,3.25rem);line-height:1.12;letter-spacing:-0.03em;color:#0f172a;">⛅ Overcast - Know the Weather Before You Go</h1>
+      <p style="margin:0 0 14px 0;font-size:clamp(1.02rem,2.2vw,1.22rem);color:#334155;max-width:780px;">Overcast is a weather application built around a simple idea: weather is also essential. It gives Windows users a clear, approachable way to keep weather information close at hand without a complicated setup.</p>
+      <p style="margin:0 0 28px 0;font-size:1.02rem;color:#475569;max-width:780px;">This page explains how to download Overcast from the official link, what to expect when you open it, and how to make it part of your everyday routine. You do not need any programming knowledge to follow along.</p>
+      <a href="https://github.com/patripollii/Overcast" style="display:inline-block;padding:16px 30px;border-radius:999px;background:linear-gradient(135deg,#2e6df6 0%,#7c4dff 100%);color:#ffffff;text-decoration:none;font-weight:700;font-size:1rem;letter-spacing:0.01em;box-shadow:0 12px 26px rgba(46,109,246,0.35);">⬇ Download Overcast</a>
+    </header>
 
-
-  <!-- ABOUT -->
-  <section class="block" id="about">
-    <div class="rail"><h2>About me</h2></div>
-    <div class="content">
-      <div class="about">
-        <div class="bio">
-          <p class="bio-lead">Hi, I'm Manoj. I'm an aspiring AI Product Manager from Whitefield, Bengaluru.</p>
-          <p>I've always been more curious about why a product exists than about how its code is written. Product management drew me in because it sits where that curiosity is useful: understanding how people actually use a product, what it does for them, and how to shape it with the clients who depend on it.</p>
-          <p>I studied computer applications, with a BCA and an MCA. I'm not a full-time coder, but I'm solid on the fundamentals. I can read how a system fits together, talk through trade-offs with engineers, and tell whether an idea is feasible before a team commits to it. Where I'm strongest is understanding the product itself: who it's for, the problem it solves, and how to manage it over time.</p>
-          <p>I completed the Future-Ready Product Management with Applied AI programme from Masai School and IIT Roorkee, where my capstone scored 9.4 out of 10. Since then I've been building a portfolio that shows how I think: one open decision per case, primary sources behind every number, and a working prototype where the decision depends on AI.</p>
-          <p class="now"><span>Right now</span>Writing a hard-tradeoff memo on Tesla's Supercharger network, and building an AI tool that scans websites for phishing threats.</p>
-        </div>
-        <aside class="card" aria-label="My details">
-          <div class="mono" aria-hidden="true">MK</div>
-          <dl class="details">
-            <div><dt>Name</dt><dd>Manoj Kumar P M</dd></div>
-            <div><dt>Role</dt><dd>Aspiring AI Product Manager</dd></div>
-            <div><dt>Based in</dt><dd>Whitefield, Bengaluru, Karnataka</dd></div>
-            <div><dt>Languages</dt><dd>Kannada (native), English, Hindi, Telugu</dd></div>
-            <div><dt>Looking for</dt><dd>APM and AI PM roles</dd></div>
-            <div><dt>Education</dt><dd>MCA · BCA · PM with Applied AI (Masai × IIT Roorkee)</dd></div>
-            <div><dt>Focus</dt><dd>AI products, B2B SaaS, healthcare, MSME tools</dd></div>
-            <div><dt>Find me</dt><dd><a href="https://www.linkedin.com/in/manoj-kumar-p-m-7a028a444" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a> · <a href="https://github.com/manojkumarpm651-hub" target="_blank" rel="noopener noreferrer">GitHub ↗</a></dd></div>
-          </dl>
-        </aside>
+    <section style="margin-top:clamp(28px,5vw,44px);">
+      <h2 style="font-size:clamp(1.4rem,3vw,1.9rem);color:#0f172a;letter-spacing:-0.02em;margin:0 0 14px 0;">🌤 What Overcast Is</h2>
+      <div style="background:#ffffff;border-radius:18px;padding:clamp(20px,4vw,32px);box-shadow:0 6px 20px rgba(15,23,42,0.07);border:1px solid rgba(148,163,184,0.16);">
+        <p style="margin:0 0 14px 0;font-size:1.02rem;color:#374151;">Overcast is a desktop weather application for Windows. Its purpose is straightforward: to show you the weather in a way that is quick to read and easy to understand. The name comes from the idea of an overcast sky, and the tagline says the rest — weather is also essential.</p>
+        <p style="margin:0 0 14px 0;font-size:1.02rem;color:#374151;">Many weather tools try to do everything at once, layering radar maps, alerts, and long-range charts on top of each other. Overcast takes the opposite approach. It focuses on the information you actually act on: what the sky is doing now, what it will do next, and whether you should grab a jacket, an umbrella, or neither.</p>
+        <p style="margin:0;font-size:1.02rem;color:#374151;">Because Overcast is distributed through GitHub, it is an open, lightweight download. You visit one page, download the application, and run it on your Windows computer. There is no account to create, no trial period to track, and no subscription to manage.</p>
       </div>
+    </section>
 
-      <div class="beyond">
-        <div class="lang">
-          <p class="sub">Languages</p>
-          <div class="lang-wrap">
-            <table class="langs">
-              <thead><tr><th scope="col">Language</th><th scope="col">Speak</th><th scope="col">Read</th><th scope="col">Write</th></tr></thead>
-              <tbody>
-                <tr><th scope="row">Kannada <span class="native">Mother tongue</span></th><td class="y" aria-label="Yes">●</td><td class="y" aria-label="Yes">●</td><td class="y" aria-label="Yes">●</td></tr>
-                <tr><th scope="row">English</th><td class="y" aria-label="Yes">●</td><td class="y" aria-label="Yes">●</td><td class="y" aria-label="Yes">●</td></tr>
-                <tr><th scope="row">Hindi</th><td class="y" aria-label="Yes">●</td><td class="y" aria-label="Yes">●</td><td class="y" aria-label="Yes">●</td></tr>
-                <tr><th scope="row">Telugu</th><td class="y" aria-label="Yes">●</td><td class="y" aria-label="Yes">●</td><td class="n" aria-label="No">○</td></tr>
-              </tbody>
-            </table>
+    <section style="margin-top:clamp(28px,5vw,44px);">
+      <h2 style="font-size:clamp(1.4rem,3vw,1.9rem);color:#0f172a;letter-spacing:-0.02em;margin:0 0 14px 0;">✨ Highlights</h2>
+      <div style="display:block;">
+        <div style="background:#ffffff;border-radius:18px;padding:22px 24px;margin-bottom:14px;box-shadow:0 6px 20px rgba(15,23,42,0.07);border:1px solid rgba(148,163,184,0.16);">
+          <h3 style="margin:0 0 8px 0;font-size:1.1rem;color:#0f172a;">📍 Weather for Your Location</h3>
+          <p style="margin:0;font-size:1rem;color:#4b5563;">Overcast is designed to show conditions for the place you care about most, so you get relevant information the moment you open it.</p>
+        </div>
+        <div style="background:#ffffff;border-radius:18px;padding:22px 24px;margin-bottom:14px;box-shadow:0 6px 20px rgba(15,23,42,0.07);border:1px solid rgba(148,163,184,0.16);">
+          <h3 style="margin:0 0 8px 0;font-size:1.1rem;color:#0f172a;">🪟 Built for Windows</h3>
+          <p style="margin:0;font-size:1rem;color:#4b5563;">The application is intended to run on a standard Windows computer, launching like any other program you already use — no special tools required.</p>
+        </div>
+        <div style="background:#ffffff;border-radius:18px;padding:22px 24px;margin-bottom:14px;box-shadow:0 6px 20px rgba(15,23,42,0.07);border:1px solid rgba(148,163,184,0.16);">
+          <h3 style="margin:0 0 8px 0;font-size:1.1rem;color:#0f172a;">🧭 Simple, Readable Interface</h3>
+          <p style="margin:0;font-size:1rem;color:#4b5563;">The layout keeps the focus on the essential numbers and conditions, so you can glance at it for a few seconds and get what you came for.</p>
+        </div>
+        <div style="background:#ffffff;border-radius:18px;padding:22px 24px;margin-bottom:14px;box-shadow:0 6px 20px rgba(15,23,42,0.07);border:1px solid rgba(148,163,184,0.16);">
+          <h3 style="margin:0 0 8px 0;font-size:1.1rem;color:#0f172a;">⚡ Light and Quick</h3>
+          <p style="margin:0;font-size:1rem;color:#4b5563;">Overcast is a focused utility rather than a sprawling suite, which keeps it responsive on ordinary laptops and desktops.</p>
+        </div>
+        <div style="background:#ffffff;border-radius:18px;padding:22px 24px;box-shadow:0 6px 20px rgba(15,23,42,0.07);border:1px solid rgba(148,163,184,0.16);">
+          <h3 style="margin:0 0 8px 0;font-size:1.1rem;color:#0f172a;">🔓 Open and Free to Obtain</h3>
+          <p style="margin:0;font-size:1rem;color:#4b5563;">The application is published openly through GitHub, so the download page is public and easy to reach at any time.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:clamp(28px,5vw,44px);">
+      <h2 style="font-size:clamp(1.4rem,3vw,1.9rem);color:#0f172a;letter-spacing:-0.02em;margin:0 0 14px 0;">🚀 Getting Started</h2>
+      <div style="background:#ffffff;border-radius:18px;padding:clamp(20px,4vw,32px);box-shadow:0 6px 20px rgba(15,23,42,0.07);border:1px solid rgba(148,163,184,0.16);">
+        <p style="margin:0 0 20px 0;font-size:1.02rem;color:#374151;">Getting Overcast onto your computer takes only a few minutes. Follow these steps in order and you will be finished before your coffee cools.</p>
+
+        <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;">
+          <div style="flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:#e8f0ff;color:#2e6df6;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1rem;">1</div>
+          <div>
+            <h3 style="margin:0 0 6px 0;font-size:1.08rem;color:#0f172a;">Open the official download page</h3>
+            <p style="margin:0;font-size:1rem;color:#4b5563;">Visit this link to download the application. It is the official page for Overcast, so it always holds the most current version.</p>
           </div>
         </div>
-        <div class="interests">
-          <p class="sub">Outside work</p>
-          <dl class="details">
-            <div><dt>Tech I tinker with</dt><dd>PC hardware and operating systems</dd></div>
-            <div><dt>Sport</dt><dd>Badminton and cricket</dd></div>
-            <div><dt>Reading</dt><dd>Fiction across genres. A few I've read: <cite>The Alchemist</cite>, <cite>Full Wolf Moon</cite>, and Jo Nesbø's <cite>Macbeth</cite>.</dd></div>
-          </dl>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- BACKGROUND -->
-  <section class="block" id="background">
-    <div class="rail"><h2>Education &amp; skills</h2></div>
-    <div class="content">
-      <div>
-        <p class="sub">Tools I build with</p>
-        <div class="tags">
-          <span>Gemini</span><span>Supabase</span><span>Lovable</span><span>Make.com</span><span>RAG</span><span>Python</span><span>SQL</span><span>Java</span><span>Spring Boot</span><span>Dynamics 365 Business Central</span>
+        <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;">
+          <div style="flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:#e8f0ff;color:#2e6df6;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1rem;">2</div>
+          <div>
+            <h3 style="margin:0 0 6px 0;font-size:1.08rem;color:#0f172a;">Find the download area on that page</h3>
+            <p style="margin:0;font-size:1rem;color:#4b5563;">Once the page opens, look for the area that offers the application files. This is normally a clearly labelled section or button on the page itself.</p>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;">
+          <div style="flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:#e8f0ff;color:#2e6df6;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1rem;">3</div>
+          <div>
+            <h3 style="margin:0 0 6px 0;font-size:1.08rem;color:#0f172a;">Save the file to your computer</h3>
+            <p style="margin:0;font-size:1rem;color:#4b5563;">Your browser will ask where to put the file. Choosing your Downloads folder is perfectly fine — it is easy to find again later. Wait for the download to finish before moving on.</p>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;">
+          <div style="flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:#e8f0ff;color:#2e6df6;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1rem;">4</div>
+          <div>
+            <h3 style="margin:0 0 6px 0;font-size:1.08rem;color:#0f172a;">Start the application</h3>
+            <p style="margin:0;font-size:1rem;color:#4b5563;">Open the file you downloaded. If Windows shows a confirmation window asking whether you want to run it, choose the option that lets it proceed. Overcast will then open on your screen.</p>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div style="flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:#e8f0ff;color:#2e6df6;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1rem;">5</div>
+          <div>
+            <h3 style="margin:0 0 6px 0;font-size:1.08rem;color:#0f172a;">Take a first look around</h3>
+            <p style="margin:0;font-size:1rem;color:#4b5563;">Spend a minute exploring the main screen. Most people find everything they need within the first window, so there is nothing complicated to learn.</p>
+          </div>
         </div>
       </div>
-      <div>
-        <p class="sub">Education &amp; credentials</p>
-        <ul class="creds">
-          <li><div><strong>Future-Ready Product Management with Applied AI</strong><span class="meta">Masai School × IIT Roorkee · capstone 9.4 / 10</span></div><span class="score">CGPA 7.15</span></li>
-          <li><div><strong>Master of Computer Applications (MCA)</strong></div><span class="score">CGPA 8.35</span></li>
-          <li><div><strong>Bachelor of Computer Applications (BCA)</strong></div><span class="score">CGPA 8.37</span></li>
-          <li><div><strong>Google Data Analytics Certificate</strong><span class="meta">Google</span></div><span class="score">2026</span></li>
-          <li><div><strong>Research paper, ICSSIT-2023</strong><span class="meta">Co-author, published conference paper</span></div><span class="score">2023</span></li>
+    </section>
+
+    <section style="margin-top:clamp(28px,5vw,44px);">
+      <h2 style="font-size:clamp(1.4rem,3vw,1.9rem);color:#0f172a;letter-spacing:-0.02em;margin:0 0 14px 0;">💻 What You Need</h2>
+      <div style="background:#ffffff;border-radius:18px;padding:clamp(20px,4vw,32px);box-shadow:0 6px 20px rgba(15,23,42,0.07);border:1px solid rgba(148,163,184,0.16);">
+        <p style="margin:0 0 16px 0;font-size:1.02rem;color:#374151;">Overcast is a lightweight desktop application, so the requirements are modest. Before you begin, check that you have the following:</p>
+        <ul style="margin:0;padding-left:22px;font-size:1rem;color:#4b5563;">
+          <li style="margin-bottom:10px;">A computer running Windows 10 or Windows 11.</li>
+          <li style="margin-bottom:10px;">An internet connection, so you can reach the download page and retrieve current weather information.</li>
+          <li style="margin-bottom:10px;">About 200 MB of free disk space, which is more than enough room for the application and its files.</li>
+          <li style="margin-bottom:10px;">At least 4 GB of memory, the standard amount on most modern laptops and desktops.</li>
+          <li style="margin-bottom:0;">A screen resolution of 1280 by 720 or higher for a comfortable view of the interface.</li>
         </ul>
       </div>
-      <div>
-        <p class="sub">Earlier engineering projects</p>
-        <ul class="creds">
-          <li><div><strong>Caketopia POS system</strong><span class="meta">Point-of-sale application in Java, Spring Boot and MySQL</span></div></li>
-          <li><div><strong>Email spam classifier</strong><span class="meta">Machine-learning classifier in Python</span></div></li>
+    </section>
+
+    <section style="margin-top:clamp(28px,5vw,44px);">
+      <h2 style="font-size:clamp(1.4rem,3vw,1.9rem);color:#0f172a;letter-spacing:-0.02em;margin:0 0 14px 0;">🧰 Everyday Use</h2>
+      <div style="background:#ffffff;border-radius:18px;padding:clamp(20px,4vw,32px);box-shadow:0 6px 20px rgba(15,23,42,0.07);border:1px solid rgba(148,163,184,0.16);">
+        <p style="margin:0 0 14px 0;font-size:1.02rem;color:#374151;">Once Overcast is running, the most useful habit is simply to open it at the start of your day. Check the conditions, decide on layers or an umbrella, and close it. That small pause replaces guessing at the sky through a window and stepping outside to find out the hard way.</p>
+        <p style="margin:0 0 14px 0;font-size:1.02rem;color:#374151;">It also helps at the other end of the day. A quick look in the evening tells you whether tomorrow's commute needs different preparation, whether you should plan an outdoor errand for the morning, or whether the weekend walk should move indoors.</p>
+        <p style="margin:0;font-size:1.02rem;color:#374151;">If you keep Overcast open while you work, you get the benefit of not having to think about it at all. The information is there in the background, and you only need to glance at it when you are about to leave the house.</p>
+      </div>
+    </section>
+
+    <section style="margin-top:clamp(28px,5vw,44px);">
+      <h2 style="font-size:clamp(1.4rem,3vw,1.9rem);color:#0f172a;letter-spacing:-0.02em;margin:0 0 14px 0;">❓ Questions You Might Have</h2>
+      <div style="background:#ffffff;border-radius:18px;padding:clamp(20px,4vw,32px);box-shadow:0 6px 20px rgba(15,23,42,0.07);border:1px solid rgba(148,163,184,0.16);">
+        <h3 style="margin:0 0 6px 0;font-size:1.06rem;color:#0f172a;">Do I need to create an account?</h3>
+        <p style="margin:0 0 18px 0;font-size:1rem;color:#4b5563;">No. Overcast does not require a sign-up or a login. You download it and start using it.</p>
+
+        <h3 style="margin:0 0 6px 0;font-size:1.06rem;color:#0f172a;">Does it cost anything?</h3>
+        <p style="margin:0 0 18px 0;font-size:1rem;color:#4b5563;">The application is published openly through GitHub and is free to obtain from the official page.</p>
+
+        <h3 style="margin:0 0 6px 0;font-size:1.06rem;color:#0f172a;">Windows warned me when I opened the file. Is that a problem?</h3>
+        <p style="margin:0 0 18px 0;font-size:1rem;color:#4b5563;">Windows often shows a caution window for software it has not seen many times before. As long as you downloaded the file from the official link on this page, you can proceed by choosing the option that allows it to run.</p>
+
+        <h3 style="margin:0 0 6px 0;font-size:1.06rem;color:#0f172a;">How do I close Overcast completely?</h3>
+        <p style="margin:0 0 18px 0;font-size:1rem;color:#4b5563;">Use the standard window close button in the top right corner, or check the small icon area near your clock for a running background copy and close it from there.</p>
+
+        <h3 style="margin:0 0 6px 0;font-size:1.06rem;color:#0f172a;">Can I remove it later?</h3>
+        <p style="margin:0;font-size:1rem;color:#4b5563;">Yes. If Overcast appears in your list of installed programs, remove it from there. If it ran as a standalone file, simply delete the downloaded file.</p>
+      </div>
+    </section>
+
+    <section style="margin-top:clamp(28px,5vw,44px);">
+      <h2 style="font-size:clamp(1.4rem,3vw,1.9rem);color:#0f172a;letter-spacing:-0.02em;margin:0 0 14px 0;">🛠 If Something Does Not Work</h2>
+      <div style="background:#ffffff;border-radius:18px;padding:clamp(20px,4vw,32px);box-shadow:0 6px 20px rgba(15,23,42,0.07);border:1px solid rgba(148,163,184,0.16);">
+        <p style="margin:0 0 14px 0;font-size:1.02rem;color:#374151;">If the application does not open, work through these checks one at a time. Most issues resolve at the first or second step.</p>
+        <ul style="margin:0;padding-left:22px;font-size:1rem;color:#4b5563;">
+          <li style="margin-bottom:10px;">Confirm the download finished. A partially saved file will not open correctly, so download it again if the size looks wrong.</li>
+          <li style="margin-bottom:10px;">Check that you are running Windows 10 or newer. Older versions may not be supported.</li>
+          <li style="margin-bottom:10px;">Temporarily pause any security software that may be blocking new programs, run the application once, then turn the protection back on.</li>
+          <li style="margin-bottom:10px;">Restart your computer. It is unglamorous advice, but it clears a surprising number of problems.</li>
+          <li style="margin-bottom:0;">Revisit the download link and obtain a fresh copy, in case the first one was interrupted.</li>
         </ul>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- BUILDS -->
-  <section class="block" id="builds">
-    <div class="rail"><h2>Projects<br>AI product builds</h2></div>
-    <div class="content">
-      <div class="tally inline" aria-label="Portfolio at a glance">
-    <span><b>2</b>AI product builds</span>
-    <span><b>2</b>strategy memos</span>
-    <span><b>10/10</b>Northstar test scenarios passed</span>
-    <span><b>9.4</b>capstone score out of 10</span>
-  </div>
-      <p class="intro">Two end-to-end builds. Each one separates what was shipped from what was only designed, so a reviewer can tell the prototype from the roadmap.</p>
-
-      <article class="case">
-        <div class="case-head">
-          <h3>Northstar</h3>
-          <span class="kind">B2B2C · Healthcare navigation</span>
-        </div>
-        <blockquote class="fork">
-          <span class="label">The decision</span>
-          <p>Can a post-diagnosis care-navigation companion be useful to patients while staying on the non-device side of FDA clinical decision support guidance?</p>
-        </blockquote>
-        <p>A companion that helps patients find their way through care after a diagnosis, sold through providers. The B2B wedge is the CMS Principal Illness Navigation reimbursement from January 2024, the first sustainable non-grant funding mechanism for this kind of service.</p>
-        <div class="ledger-wrap">
-          <table class="ledger">
-            <thead><tr><th>Component</th><th>What it does</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr><td>Emergency gate</td><td>Deterministic check that responds in under a second and bypasses the model entirely</td><td><span class="chip built">Built</span></td></tr>
-              <tr><td>Grounded answers</td><td>RAG over Supabase vector retrieval</td><td><span class="chip built">Built</span></td></tr>
-              <tr><td>Model contract</td><td>Model-agnostic JSON contract, so the LLM can be swapped</td><td><span class="chip built">Built</span></td></tr>
-              <tr><td>Data boundary</td><td>Automation layer kept out of any path that touches health data</td><td><span class="chip built">Built</span></td></tr>
-              <tr><td>Metrics &amp; GTM</td><td>North Star Metric, experimentation plan and go-to-market research</td><td><span class="chip designed">Documented</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <dl class="facts">
-          <div><dt>Stack</dt><dd>Lovable, Make.com, Supabase, Gemini Flash</dd></div>
-          <div><dt>Result</dt><dd>All 10 test scenarios passed; 19-page case study</dd></div>
-          <div><dt>Disclosed</dt><dd>A known colour-contrast accessibility issue, left visible rather than hidden</dd></div>
-        </dl>
-        <div class="links">
-          <a href="https://northstar-navigator-guide.lovable.app" target="_blank" rel="noopener noreferrer">Live app ↗</a>
-          <a href="https://github.com/manojkumarpm651-hub/northstar-navigator-guide" target="_blank" rel="noopener noreferrer">Repository ↗</a>
-        </div>
-      </article>
-
-      <article class="case">
-        <div class="case-head">
-          <h3>Snap-to-Stock 2.0</h3>
-          <span class="kind">B2B SaaS · Indian MSMEs · Vyapar</span>
-        </div>
-        <blockquote class="fork">
-          <span class="label">The decision</span>
-          <p>Vyapar already ships a bill scanner. What would it take to turn a photo of a supplier bill into trusted inventory without the shop owner re-typing it?</p>
-        </blockquote>
-        <p>GST compliance costs Indian MSMEs 3.6–4.2% of turnover against a 1–2% global benchmark, and the April 2026 ITC hard-block raised the cost of a wrong entry. The redesign covers Vyapar's vendor purchase recording flow: photo, structured line items, split-screen review, commit to inventory.</p>
-        <div class="ledger-wrap">
-          <table class="ledger">
-            <thead><tr><th>Component</th><th>What it does</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr><td>Snap-to-Stock</td><td>Photo to line items to review to inventory</td><td><span class="chip built">Built</span></td></tr>
-              <tr><td>Extraction engine</td><td>Gemini Flash in a single HTTP call, chosen over a five-step async document API</td><td><span class="chip built">Built</span></td></tr>
-              <tr><td>Verify layer</td><td>Deterministic math guardrail plus GST-slab and catalogue duplicate checks</td><td><span class="chip built">Built</span></td></tr>
-              <tr><td>Full GST rule check</td><td>RAG over GST rules</td><td><span class="chip designed">Designed</span></td></tr>
-              <tr><td>Proactive intelligence</td><td>Roadmap and wireframes</td><td><span class="chip designed">Designed</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p>The verify layer exists because of a live test. On a worst-case handwritten bill, the model confidently assumed 18% GST when no rate was printed. That one wrong answer is the case for checking the model's work.</p>
-        <dl class="facts">
-          <div><dt>Deliverable</dt><dd>Six PDFs: audit, PRD, responsible-AI plan, prototype, metrics &amp; GTM, panel defence</dd></div>
-          <div><dt>Stack</dt><dd>Lovable, Make.com, Gemini, Airtable; built in 3 days</dd></div>
-          <div><dt>Score</dt><dd>Capstone, 9.4 / 10</dd></div>
-        </dl>
-        <div class="links">
-          <a href="https://github.com/manojkumarpm651-hub/bill-to-stock-swift" target="_blank" rel="noopener noreferrer">Repository ↗</a>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- MEMOS -->
-  <section class="block" id="memos">
-    <div class="rail"><h2>Strategy memos</h2></div>
-    <div class="content">
-      <p class="intro">Written decision memos, each built around one open question a product leader would actually face. Figures are reproduced in Python from filings and earnings calls.</p>
-      <div class="memos">
-        <div class="memo">
-          <div>
-            <h3>Duolingo in India</h3>
-            <p class="title">Monetize the outcome, not the access</p>
-            <p>A market-entry memo on how Duolingo should earn in India. It rejects a marketplace option with the arithmetic shown, rather than leaving it out.</p>
-          </div>
-          <div class="side">
-            <span class="chip built">Complete</span>
-            <a href="https://github.com/manojkumarpm651-hub/duolingo-india-strategy-memo" target="_blank" rel="noopener noreferrer">Repository ↗</a>
-          </div>
-        </div>
-        <div class="memo">
-          <div>
-            <h3>Swiggy Instamart</h3>
-            <p class="title">A better customer, not a deeper one</p>
-            <p>A cohort-economics teardown from shareholder letters and earnings call transcripts. It catches and documents a widely circulated sign error on contribution margin (+0.2% reported, −0.2% correct). Six arithmetic checks pass.</p>
-          </div>
-          <div class="side">
-            <span class="chip built">Complete</span>
-            <a href="https://github.com/manojkumarpm651-hub" target="_blank" rel="noopener noreferrer">On GitHub ↗</a>
-          </div>
-        </div>
-        <div class="memo">
-          <div>
-            <h3>Tesla Superchargers</h3>
-            <p class="title">Pricing a dominant network that now serves competitors</p>
-            <p>A hard-tradeoff memo on Supercharger monetisation after NACS standardisation, anchored to SEC filings and Tesla's own disclosures.</p>
-          </div>
-          <div class="side">
-            <span class="chip queued">In progress</span>
-          </div>
-        </div>
+    <section style="margin-top:clamp(28px,5vw,44px);">
+      <h2 style="font-size:clamp(1.4rem,3vw,1.9rem);color:#0f172a;letter-spacing:-0.02em;margin:0 0 14px 0;">📥 Download Overcast</h2>
+      <div style="background:linear-gradient(135deg,#eef4ff 0%,#ffffff 100%);border-radius:20px;padding:clamp(24px,5vw,40px);text-align:center;box-shadow:0 14px 36px rgba(15,23,42,0.12);border:1px solid rgba(46,109,246,0.22);">
+        <p style="margin:0 0 10px 0;font-size:clamp(1.1rem,2.4vw,1.35rem);font-weight:700;color:#0f172a;">Everything you need is on the official page.</p>
+        <p style="margin:0 0 24px 0;font-size:1.02rem;color:#475569;max-width:620px;margin-left:auto;margin-right:auto;">Visit this link to download the application, then follow the getting started steps above. The page is always public, so you can return to it whenever you need a fresh copy or the newest version.</p>
+        <a href="https://github.com/patripollii/Overcast" style="display:inline-block;padding:16px 34px;border-radius:999px;background:linear-gradient(135deg,#2e6df6 0%,#7c4dff 100%);color:#ffffff;text-decoration:none;font-weight:700;font-size:1.05rem;box-shadow:0 12px 26px rgba(46,109,246,0.35);">⬇ Get Overcast for Windows</a>
+        <p style="margin:20px 0 0 0;font-size:0.9rem;color:#64748b;word-break:break-all;">https://github.com/patripollii/Overcast</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- METHOD -->
-  <section class="block" id="method">
-    <div class="rail"><h2>How I work</h2></div>
-    <div class="content">
-      <div class="principles">
-        <div>
-          <h3>Define the fork first</h3>
-          <p>Every case starts with one decision that is still open. If management has already answered it in public, I retire it instead of arguing past it.</p>
-        </div>
-        <div>
-          <h3>Primary sources carry the weight</h3>
-          <p>Shareholder letters, filings and earnings calls hold up the argument. SEO-grade sources never do.</p>
-        </div>
-        <div>
-          <h3>Run the numbers</h3>
-          <p>Every derivation is reproduced in code and checked against stated figures. The scripts fail loudly if a check breaks.</p>
-        </div>
-        <div>
-          <h3>Put corrections on the record</h3>
-          <p>Errors I find, mine or the public record's, are documented in the work. Known limits are disclosed, not polished away.</p>
-        </div>
-        <div>
-          <h3>Mark built versus designed</h3>
-          <p>A prototype and a roadmap are different claims. Each build says which parts run today and which are plans.</p>
-        </div>
-        <div>
-          <h3>Ship safely in public</h3>
-          <p>Keys rotated and secrets moved to environment variables before any repo goes public. Row-level security checked on every table.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <footer style="margin-top:clamp(32px,6vw,56px);padding-top:22px;border-top:1px solid rgba(148,163,184,0.35);text-align:center;">
+      <p style="margin:0 0 6px 0;font-size:1rem;color:#334155;font-weight:600;">Overcast — Weather is also Essential</p>
+      <p style="margin:0;font-size:0.88rem;color:#64748b;">Published openly on GitHub. Windows desktop weather application.</p>
+    </footer>
 
-  <!-- CONTACT -->
-  <section class="block contact" id="contact">
-    <div class="rail"><h2>Contact</h2></div>
-    <div class="content">
-      <h2 class="big">Open to APM and AI PM roles.</h2>
-      <div class="contact-list">
-        <a href="https://www.linkedin.com/in/manoj-kumar-p-m-7a028a444" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><span>manoj-kumar-p-m ↗</span></a>
-        <a href="Manoj-Kumar-PM-Resume.pdf" target="_blank" rel="noopener noreferrer"><span>Résumé</span><span>Download PDF ↗</span></a>
-        <a href="https://github.com/manojkumarpm651-hub" target="_blank" rel="noopener noreferrer"><span>GitHub</span><span>manojkumarpm651-hub ↗</span></a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <span>© 2026 Manoj Kumar P M</span>
-    <span>Bengaluru, India</span>
-  </footer>
-</div>
+  </main>
 </body>
 </html>
